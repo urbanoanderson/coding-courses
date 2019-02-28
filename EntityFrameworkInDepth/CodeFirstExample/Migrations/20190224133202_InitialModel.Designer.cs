@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeFirstExample.Migrations
 {
     [DbContext(typeof(PlutoContext))]
-    [Migration("20190224031741_InitialSchema")]
-    partial class InitialSchema
+    [Migration("20190224133202_InitialModel")]
+    partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,14 +58,17 @@ namespace CodeFirstExample.Migrations
 
                     b.Property<DateTime?>("DatePublished");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2000);
 
                     b.Property<float>("FullPrice");
 
                     b.Property<int>("Level");
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 

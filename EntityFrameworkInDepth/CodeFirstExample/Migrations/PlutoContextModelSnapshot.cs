@@ -56,14 +56,17 @@ namespace CodeFirstExample.Migrations
 
                     b.Property<DateTime?>("DatePublished");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2000);
 
                     b.Property<float>("FullPrice");
 
                     b.Property<int>("Level");
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 

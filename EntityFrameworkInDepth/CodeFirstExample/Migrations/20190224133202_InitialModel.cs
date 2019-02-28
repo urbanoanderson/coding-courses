@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CodeFirstExample.Migrations
 {
-    public partial class InitialSchema : Migration
+    public partial class InitialModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,8 +52,8 @@ namespace CodeFirstExample.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 255, nullable: false),
+                    Description = table.Column<string>(maxLength: 2000, nullable: false),
                     Level = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: true),
                     DatePublished = table.Column<DateTime>(nullable: true),

@@ -1,3 +1,4 @@
+using CodeFirstExample.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeFirstExample
@@ -16,23 +17,8 @@ namespace CodeFirstExample
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Course_Tag>()
-                .HasKey(bc => new { bc.CourseId, bc.TagId });
-            modelBuilder.Entity<Course_Tag>()
-                .HasOne(bc => bc.Course)
-                .WithMany(b => b.CourseTags)
-                .HasForeignKey(bc => bc.CourseId);
-            modelBuilder.Entity<Course_Tag>()
-                .HasOne(bc => bc.Tag)
-                .WithMany(c => c.CourseTags)
-                .HasForeignKey(bc => bc.TagId);
-
-            modelBuilder.Entity<Category>().HasData(
-                new Category() { Id = 1, Name = "Web Development" },
-                new Category() { Id = 2, Name = "Programming Languages" }
-            );
-
-            //migrationBuilder.Sql("UPDATE Courses SET CategoryId = 1");
+            modelBuilder.ApplyConfiguration(new CourseTagConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
         }
     }
 }

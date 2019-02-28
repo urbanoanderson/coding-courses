@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CodeFirstExample
 {
@@ -10,11 +11,18 @@ namespace CodeFirstExample
         Intermediate = 2,
         Advanced = 3
     }
+
+    [Table("Courses")]
     public class Course
     {
         public int Id { get; set; }
+        
         [Required]
+        [MaxLength(255)]
         public string Name { get; set; }
+        
+        [Required]
+        [MaxLength(2000)]
         public string Description { get; set; }
         public CourseLevel Level { get; set; }
 
