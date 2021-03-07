@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,8 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MoviesAPI.Filters;
+using MoviesAPI.Services;
 
-namespace moviesAPI
+namespace MoviesAPI
 {
     public class Startup
     {
@@ -23,18 +26,27 @@ namespace moviesAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IRepository, InMemoryRepository>();
 
-            services.AddControllers();
+            services.AddTransient<MyActionFilter>();
+
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(MyExceptionFilter));
+            });
+
+            services.AddResponseCaching();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "moviesAPI", Version = "v1" });
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -47,6 +59,10 @@ namespace moviesAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseResponseCaching();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
