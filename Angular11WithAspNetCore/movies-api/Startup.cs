@@ -2,18 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MoviesAPI.Filters;
-using MoviesAPI.Services;
+using MoviesAPI.Helpers;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 
 namespace MoviesAPI
 {
@@ -28,9 +29,42 @@ namespace MoviesAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IRepository, InMemoryRepository>();
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    sqlOptions => sqlOptions.UseNetTopologySuite()
+                );
+            });
 
-            services.AddTransient<MyActionFilter>();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    string frontendUrl = Configuration.GetValue<string>("FrontendUrl");
+
+                    builder
+                        .WithOrigins(frontendUrl)
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .WithExposedHeaders(new string[] { "totalAmountOfRecords" });
+                });
+            });
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddSingleton(provider => new MapperConfiguration(config =>
+            {
+                var geometryFactory = provider.GetRequiredService<GeometryFactory>();
+                config.AddProfile(new AutoMapperProfiles(geometryFactory));
+            }).CreateMapper());
+
+            services.AddSingleton<GeometryFactory>(
+                NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326));
+
+            services.AddHttpContextAccessor();
+
+            services.AddScoped<IFileStorageService, LocalFileStorageService>();
 
             services.AddControllers(options =>
             {
@@ -58,7 +92,11 @@ namespace MoviesAPI
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseResponseCaching();
 

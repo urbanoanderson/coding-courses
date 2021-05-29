@@ -9,7 +9,7 @@ namespace MoviesAPI.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(30)]
+        [StringLength(50)]
         [FirstLetterUppercase]
         public string Name { get; set; }
     }

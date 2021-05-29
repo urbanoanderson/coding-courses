@@ -16,7 +16,7 @@
   <app-input-img [urlCurrentImage]="model?.picture" (onImageSelected)="onImageSelected($event)"></app-input-img>
 
   <h4>Biography</h4>
-  <app-input-markdown [markdownContent]="model?.biography" (changeMarkdown)="changeMarkdown($event)"></app-input-markdown>
+  <app-input-markdown [markdownContent]="model?.biography" [label]="'Biography'" (changeMarkdown)="changeMarkdown($event)"></app-input-markdown>
 
   <div>
     <button mat-flat-button color="primary" [disabled]="form.invalid">Save Changes</button>

@@ -5,6 +5,7 @@
 *.pydevproject
 .project
 .metadata
+wwwroot/*/
 bin/
 obj/
 tmp/
