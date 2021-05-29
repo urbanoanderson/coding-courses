@@ -1,0 +1,9 @@
+<app-rating (onRating)="handleRating($event)"></app-rating>
+
+<h1>In Theaters</h1>
+
+<app-movies-list [movies]="moviesInTheaters"></app-movies-list>
+
+<h1>Future Releases</h1>
+
+<app-movies-list [movies]="moviesFutureReleases"></app-movies-list>
