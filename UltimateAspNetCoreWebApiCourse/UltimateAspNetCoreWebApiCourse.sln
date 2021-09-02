@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateAspNetCoreWebApiCourse", "UltimateAspNetCoreWebApiCourse\UltimateAspNetCoreWebApiCourse.csproj", "{62FEEEFF-B216-4CBE-9962-1EDCF9DB58BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltimateAspNetCoreWebApiCourse", "UltimateAspNetCoreWebApiCourse\UltimateAspNetCoreWebApiCourse.csproj", "{62FEEEFF-B216-4CBE-9962-1EDCF9DB58BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{0D1A8AFC-927B-462E-A342-734CF5D2D663}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{F9989082-CEC0-435B-9027-52868F5AAC62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{62FEEEFF-B216-4CBE-9962-1EDCF9DB58BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62FEEEFF-B216-4CBE-9962-1EDCF9DB58BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62FEEEFF-B216-4CBE-9962-1EDCF9DB58BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D1A8AFC-927B-462E-A342-734CF5D2D663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D1A8AFC-927B-462E-A342-734CF5D2D663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D1A8AFC-927B-462E-A342-734CF5D2D663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D1A8AFC-927B-462E-A342-734CF5D2D663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9989082-CEC0-435B-9027-52868F5AAC62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9989082-CEC0-435B-9027-52868F5AAC62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9989082-CEC0-435B-9027-52868F5AAC62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9989082-CEC0-435B-9027-52868F5AAC62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
