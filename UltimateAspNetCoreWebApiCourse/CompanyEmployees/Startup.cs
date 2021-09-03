@@ -13,9 +13,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using UltimateAspNetCoreWebApiCourse.Extensions;
+using CompanyEmployees.Extensions;
 
-namespace UltimateAspNetCoreWebApiCourse
+namespace CompanyEmployees
 {
     public class Startup
     {
@@ -32,6 +32,8 @@ namespace UltimateAspNetCoreWebApiCourse
             services.ConfigureCors();
             services.ConfigureIISIntegration();
             services.ConfigureLoggerService();
+            services.ConfigureSqlContext(this.Configuration);
+            services.ConfigureRepositoryManager();
             services.AddControllers();
         }
 
