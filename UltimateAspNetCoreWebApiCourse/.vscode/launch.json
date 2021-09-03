@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/CompanyEmployees/bin/Debug/net5.0/UltimateAspNetCoreWebApiCourse.dll",
+            "cwd": "${workspaceFolder}/${config:mainProjectFolder}",
+            "program": "${workspaceFolder}/${config:mainProjectFolder}/${config:mainProjectDll}",
             "args": [],
-            "cwd": "${workspaceFolder}/CompanyEmployees",
             "stopAtEntry": false,
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
