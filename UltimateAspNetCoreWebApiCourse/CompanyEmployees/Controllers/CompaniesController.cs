@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -35,6 +36,23 @@ namespace CompanyEmployees.Controllers
             var companiesDto = this.mapper.Map<IEnumerable<CompanyDto>>(companies);
 
             return this.Ok(companiesDto);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetCompany(Guid id)
+        {
+            Company company = this.repository.Company.GetCompany(id, trackChanges: false);
+
+            if (company == null)
+            {
+                this.logger.LogInfo($"Company with id '{id}' doesn't exist in the database.");
+                return this.NotFound();
+            }
+            else
+            {
+                var companyDto = this.mapper.Map<CompanyDto>(company);
+                return this.Ok(companyDto);
+            }
         }
     }
 }
