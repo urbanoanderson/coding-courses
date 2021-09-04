@@ -29,6 +29,7 @@ namespace CompanyEmployees
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
             services.ConfigureCors();
             services.ConfigureIISIntegration();
             services.ConfigureLoggerService();
