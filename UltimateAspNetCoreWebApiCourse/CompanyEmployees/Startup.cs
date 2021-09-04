@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CompanyEmployees.Extensions;
+using Contracts;
 
 namespace CompanyEmployees
 {
@@ -38,7 +39,10 @@ namespace CompanyEmployees
             services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            ILoggerManager logger)
         {
             if (env.IsDevelopment())
             {
@@ -49,6 +53,7 @@ namespace CompanyEmployees
                 app.UseHsts();
             }
 
+            app.ConfigureExceptionHandler(logger);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

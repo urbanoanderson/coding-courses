@@ -30,18 +30,11 @@ namespace CompanyEmployees.Controllers
         [HttpGet]
         public IActionResult GetCompanies()
         {
-            try
-            {
-                var companies = this.repository.Company.GetAllCompanies(trackChanges: false);
-                var companiesDto = this.mapper.Map<IEnumerable<CompanyDto>>(companies);
+            var companies = this.repository.Company.GetAllCompanies(trackChanges: false);
 
-                return this.Ok(companiesDto);
-            }
-            catch (Exception ex)
-            {
-                this.logger.LogError($"Something went wrong in the {nameof(GetCompanies)} action {ex}");
-                return this.StatusCode(500, "Internal Server Error");
-            }
+            var companiesDto = this.mapper.Map<IEnumerable<CompanyDto>>(companies);
+
+            return this.Ok(companiesDto);
         }
     }
 }
