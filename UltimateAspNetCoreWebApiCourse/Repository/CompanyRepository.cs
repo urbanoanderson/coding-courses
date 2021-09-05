@@ -25,5 +25,15 @@ namespace Repository
         {
             return this.FindByCondition(c => c.Id.Equals(companyId), trackChanges).SingleOrDefault();
         }
+
+        public void CreateCompany(Company company)
+        {
+            this.Create(company);
+        }
+
+        public IEnumerable<Company> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
+        {
+            return this.FindByCondition(x => ids.Contains(x.Id), trackChanges).ToList();
+        }
     }
 }

@@ -19,6 +19,10 @@ namespace CompanyEmployees
                 });
 
             this.CreateMap<Employee, EmployeeDto>();
+
+            this.CreateMap<CompanyForCreationDto, Company>();
+
+            this.CreateMap<EmployeeForCreationDto, Employee>();
         }
     }
 }

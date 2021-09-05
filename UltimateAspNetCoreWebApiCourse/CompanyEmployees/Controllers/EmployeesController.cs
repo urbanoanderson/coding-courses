@@ -46,7 +46,7 @@ namespace CompanyEmployees.Controllers
             return this.Ok(employeesDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetEmployeeForCompany")]
         public IActionResult GetEmployeeForCompany(Guid companyId, Guid id)
         {
             Company company = this.repository.Company.GetCompany(companyId, trackChanges: false);
@@ -68,6 +68,33 @@ namespace CompanyEmployees.Controllers
             EmployeeDto employeeDto = this.mapper.Map<EmployeeDto>(employee);
 
             return this.Ok(employeeDto);
+        }
+
+        [HttpPost]
+        public IActionResult CreateEmployeeForCompany(Guid companyId, [FromBody]EmployeeForCreationDto employeeDto)
+        {
+            if (employeeDto == null)
+            {
+                this.logger.LogError($"{nameof(EmployeeForCreationDto)} object received from client is null.");
+                return this.BadRequest($"{nameof(EmployeeForCreationDto)} is null");
+            }
+
+            Company company = this.repository.Company.GetCompany(companyId, trackChanges: false);
+
+            if (company == null)
+            {
+                this.logger.LogInfo($"Company with id '{companyId}' doesn't exist in the database.");
+                return this.NotFound();
+            }
+
+            Employee employee = this.mapper.Map<Employee>(employeeDto);
+
+            this.repository.Employee.CreateEmployeeForCompany(companyId, employee);
+            this.repository.Save();
+
+            EmployeeDto employeeToReturn = this.mapper.Map<EmployeeDto>(employee);
+
+            return this.CreatedAtRoute("GetEmployeeForCompany", new { companyId, id = employeeToReturn.Id }, employeeToReturn);
         }
     }
 }
