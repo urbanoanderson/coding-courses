@@ -32,7 +32,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Company by Id",
+					"name": "Get Company",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -44,6 +44,28 @@
 							"path": [
 								"companies",
 								"47be1c53-5bf7-4c1c-b66d-b302c811e469"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company Collection",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/companies/collection/(c7da5d4c-619e-44c6-7e3f-08d9707742f0,b050b79a-9abf-4aba-7e40-08d9707742f0)",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"companies",
+								"collection",
+								"(c7da5d4c-619e-44c6-7e3f-08d9707742f0,b050b79a-9abf-4aba-7e40-08d9707742f0)"
 							]
 						}
 					},
@@ -150,6 +172,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Update Company",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Admin Solutions Ltd\",\r\n        \"address\": \"312 Forest Avenue, BF 923\",\r\n        \"country\": \"Brazil\",\r\n        \"employees\": [\r\n            {\r\n                \"name\": \"Geil Metain\",\r\n                \"age\": 23,\r\n                \"position\": \"Admin\"\r\n            }\r\n        ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -157,18 +206,18 @@
 			"name": "Employees",
 			"item": [
 				{
-					"name": "Get All Employees of Company",
+					"name": "Get Employees of Company",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/companies/47be1c53-5bf7-4c1c-b66d-b302c811e469/employees/",
+							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63/employees/",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"companies",
-								"47be1c53-5bf7-4c1c-b66d-b302c811e469",
+								"1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63",
 								"employees",
 								""
 							]
@@ -177,7 +226,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Employee of Company by Id",
+					"name": "Get Employee of Company",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -226,7 +275,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete Employee of Company by",
+					"name": "Delete Employee of Company",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -240,6 +289,35 @@
 								"47be1c53-5bf7-4c1c-b66d-b302c811e469",
 								"employees",
 								"c67e3dda-a055-4cd1-aaed-c24d3e6d4844"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Employee of Company",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kane Miller\",\r\n    \"age\": 36,\r\n    \"position\": \"Senior Administrator\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63/employees/98b93477-7e6a-4745-904f-8c11c3450781",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63",
+								"employees",
+								"98b93477-7e6a-4745-904f-8c11c3450781"
 							]
 						}
 					},

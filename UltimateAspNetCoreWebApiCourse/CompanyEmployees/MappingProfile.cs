@@ -22,7 +22,11 @@ namespace CompanyEmployees
 
             this.CreateMap<CompanyForCreationDto, Company>();
 
+            this.CreateMap<CompanyForUpdateDto, Company>();
+
             this.CreateMap<EmployeeForCreationDto, Employee>();
+
+            this.CreateMap<EmployeeForUpdateDto, Employee>();
         }
     }
 }
