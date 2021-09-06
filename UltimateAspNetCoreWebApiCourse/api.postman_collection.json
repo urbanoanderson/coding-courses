@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "c0849e34-5ed3-448f-83c0-805cd1c794d8",
+		"name": "Ultimate ASP.NET Core Web API Book",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Companies",
+			"item": [
+				{
+					"name": "Get All Companies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/companies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/companies/47be1c53-5bf7-4c1c-b66d-b302c811e469",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"47be1c53-5bf7-4c1c-b66d-b302c811e469"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Marketing Solutions Ltd\",\r\n    \"address\": \"242 Sunny Avenue, K 334\",\r\n    \"country\": \"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/companies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Company With Employees",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Marketing Solutions Ltd\",\r\n    \"address\": \"242 Sunny Avenue, K 334\",\r\n    \"country\": \"USA\",\r\n    \"employees\": [\r\n        {\r\n            \"name\": \"Anderson Urbano\",\r\n            \"age\": 28,\r\n            \"position\": \"Software engineer\"\r\n        },\r\n        {\r\n            \"name\": \"Martin Geil\",\r\n            \"age\": 29,\r\n            \"position\": \"Administrative\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/companies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Company Collection",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"name\": \"Sales all over the world Ltd\",\r\n        \"address\": \"355 Open Street, B 784\",\r\n        \"country\": \"USA\"\r\n    },\r\n    {\r\n        \"name\": \"Branding Ltd\",\r\n        \"address\": \"255 Main Streen, K 334\",\r\n        \"country\": \"USA\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/companies/collection",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"collection"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Company",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/companies/47be1c53-5bf7-4c1c-b66d-b302c811e469",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"47be1c53-5bf7-4c1c-b66d-b302c811e469"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Get All Employees of Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/companies/47be1c53-5bf7-4c1c-b66d-b302c811e469/employees/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"47be1c53-5bf7-4c1c-b66d-b302c811e469",
+								"employees",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee of Company by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/companies/47be1c53-5bf7-4c1c-b66d-b302c811e469/employees/c67e3dda-a055-4cd1-aaed-c24d3e6d4844",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"47be1c53-5bf7-4c1c-b66d-b302c811e469",
+								"employees",
+								"c67e3dda-a055-4cd1-aaed-c24d3e6d4844"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Employee For Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Martin Geil\",\r\n    \"age\": 29,\r\n    \"position\": \"Marketing expert\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/companies/47be1c53-5bf7-4c1c-b66d-b302c811e469/employees/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"47be1c53-5bf7-4c1c-b66d-b302c811e469",
+								"employees",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Employee of Company by",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/companies/47be1c53-5bf7-4c1c-b66d-b302c811e469/employees/c67e3dda-a055-4cd1-aaed-c24d3e6d4844",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"47be1c53-5bf7-4c1c-b66d-b302c811e469",
+								"employees",
+								"c67e3dda-a055-4cd1-aaed-c24d3e6d4844"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000/api"
+		},
+		{
+			"key": "base_url_ssl",
+			"value": "https://localhost:5001/api"
+		}
+	]
+}
