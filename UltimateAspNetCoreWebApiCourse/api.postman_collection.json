@@ -322,6 +322,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Patch Employee of Company",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/age\",\r\n        \"value\": \"28\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63/employees/98b93477-7e6a-4745-904f-8c11c3450781",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63",
+								"employees",
+								"98b93477-7e6a-4745-904f-8c11c3450781"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

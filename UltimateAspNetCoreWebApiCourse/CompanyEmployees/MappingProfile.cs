@@ -26,7 +26,7 @@ namespace CompanyEmployees
 
             this.CreateMap<EmployeeForCreationDto, Employee>();
 
-            this.CreateMap<EmployeeForUpdateDto, Employee>();
+            this.CreateMap<EmployeeForUpdateDto, Employee>().ReverseMap();
         }
     }
 }
