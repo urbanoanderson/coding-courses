@@ -43,6 +43,6 @@ namespace Repository
             }
         }
 
-        public void Save() => this.repositoryContext.SaveChanges();
+        public Task SaveAsync() => this.repositoryContext.SaveChangesAsync();
     }
 }

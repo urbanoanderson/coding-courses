@@ -31,9 +31,9 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetEmployeesForCompany(Guid companyId)
+        public async Task<IActionResult> GetEmployeesForCompany(Guid companyId)
         {
-            Company company = this.repository.Company.GetCompany(companyId, trackChanges: false);
+            Company company = await this.repository.Company.GetCompanyAsync(companyId, trackChanges: false);
 
             if (company == null)
             {
@@ -41,16 +41,16 @@ namespace CompanyEmployees.Controllers
                 return this.NotFound();
             }
 
-            IEnumerable<Employee> employees = this.repository.Employee.GetEmployees(companyId, trackChanges: false);
+            IEnumerable<Employee> employees = await this.repository.Employee.GetEmployeesAsync(companyId, trackChanges: false);
             IEnumerable<EmployeeDto> employeesDto = this.mapper.Map<IEnumerable<EmployeeDto>>(employees);
 
             return this.Ok(employeesDto);
         }
 
         [HttpGet("{id}", Name = "GetEmployeeForCompany")]
-        public IActionResult GetEmployeeForCompany(Guid companyId, Guid id)
+        public async Task<IActionResult> GetEmployeeForCompany(Guid companyId, Guid id)
         {
-            Company company = this.repository.Company.GetCompany(companyId, trackChanges: false);
+            Company company = await this.repository.Company.GetCompanyAsync(companyId, trackChanges: false);
 
             if (company == null)
             {
@@ -58,7 +58,7 @@ namespace CompanyEmployees.Controllers
                 return this.NotFound();
             }
 
-            Employee employee = this.repository.Employee.GetEmployee(companyId, id, trackChanges: false);
+            Employee employee = await this.repository.Employee.GetEmployeeAsync(companyId, id, trackChanges: false);
 
             if (employee == null)
             {
@@ -72,7 +72,7 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateEmployeeForCompany(Guid companyId, [FromBody]EmployeeForCreationDto employeeDto)
+        public async Task<IActionResult> CreateEmployeeForCompany(Guid companyId, [FromBody]EmployeeForCreationDto employeeDto)
         {
             if (employeeDto == null)
             {
@@ -86,7 +86,7 @@ namespace CompanyEmployees.Controllers
                 return this.UnprocessableEntity(ModelState);
             }
 
-            Company company = this.repository.Company.GetCompany(companyId, trackChanges: false);
+            Company company = await this.repository.Company.GetCompanyAsync(companyId, trackChanges: false);
 
             if (company == null)
             {
@@ -97,7 +97,7 @@ namespace CompanyEmployees.Controllers
             Employee employee = this.mapper.Map<Employee>(employeeDto);
 
             this.repository.Employee.CreateEmployeeForCompany(companyId, employee);
-            this.repository.Save();
+            await this.repository.SaveAsync();
 
             EmployeeDto employeeToReturn = this.mapper.Map<EmployeeDto>(employee);
 
@@ -105,9 +105,9 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteEmployeeForCompany(Guid companyId, Guid id)
+        public async Task<IActionResult> DeleteEmployeeForCompany(Guid companyId, Guid id)
         {
-            Company company = this.repository.Company.GetCompany(companyId, trackChanges: false);
+            Company company = await this.repository.Company.GetCompanyAsync(companyId, trackChanges: false);
 
             if (company == null)
             {
@@ -115,7 +115,7 @@ namespace CompanyEmployees.Controllers
                 return this.NotFound();
             }
 
-            Employee employee = this.repository.Employee.GetEmployee(companyId, id, trackChanges: false);
+            Employee employee = await this.repository.Employee.GetEmployeeAsync(companyId, id, trackChanges: false);
 
             if (employee == null)
             {
@@ -124,13 +124,13 @@ namespace CompanyEmployees.Controllers
             }
 
             this.repository.Employee.DeleteEmployee(employee);
-            this.repository.Save();
+            await this.repository.SaveAsync();
 
             return this.NoContent();
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateEmployeeForCompany(Guid companyId, Guid id, [FromBody]EmployeeForUpdateDto employeeDto)
+        public async Task<IActionResult> UpdateEmployeeForCompany(Guid companyId, Guid id, [FromBody]EmployeeForUpdateDto employeeDto)
         {
             if (employeeDto == null)
             {
@@ -144,7 +144,7 @@ namespace CompanyEmployees.Controllers
                 return this.UnprocessableEntity(ModelState);
             }
 
-            Company company = this.repository.Company.GetCompany(companyId, trackChanges: false);
+            Company company = await this.repository.Company.GetCompanyAsync(companyId, trackChanges: false);
 
             if (company == null)
             {
@@ -152,7 +152,7 @@ namespace CompanyEmployees.Controllers
                 return this.NotFound();
             }
 
-            Employee employee = this.repository.Employee.GetEmployee(companyId, id, trackChanges: true);
+            Employee employee = await this.repository.Employee.GetEmployeeAsync(companyId, id, trackChanges: true);
 
             if (employee == null)
             {
@@ -161,13 +161,13 @@ namespace CompanyEmployees.Controllers
             }
 
             this.mapper.Map(employeeDto, employee);
-            this.repository.Save();
+            await this.repository.SaveAsync();
 
             return this.NoContent();
         }
 
         [HttpPatch("{id}")]
-        public IActionResult PartiallyUpdateEmployeeForCompany(Guid companyId, Guid id,
+        public async Task<IActionResult> PartiallyUpdateEmployeeForCompany(Guid companyId, Guid id,
             [FromBody]JsonPatchDocument<EmployeeForUpdateDto> patchDoc)
         {
             if (patchDoc == null)
@@ -176,7 +176,7 @@ namespace CompanyEmployees.Controllers
                 return this.BadRequest("patchDoc is null");
             }
 
-            Company company = this.repository.Company.GetCompany(companyId, trackChanges: false);
+            Company company = await this.repository.Company.GetCompanyAsync(companyId, trackChanges: false);
 
             if (company == null)
             {
@@ -184,7 +184,7 @@ namespace CompanyEmployees.Controllers
                 return this.NotFound();
             }
 
-            Employee employee = this.repository.Employee.GetEmployee(companyId, id, trackChanges: true);
+            Employee employee = await this.repository.Employee.GetEmployeeAsync(companyId, id, trackChanges: true);
 
             if (employee == null)
             {
@@ -205,7 +205,7 @@ namespace CompanyEmployees.Controllers
 
             patchDoc.ApplyTo(employeeDto);
             this.mapper.Map(employeeDto, employee);
-            this.repository.Save();
+            await this.repository.SaveAsync();
 
             return this.NoContent();
         }
