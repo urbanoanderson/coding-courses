@@ -80,6 +80,12 @@ namespace CompanyEmployees.Controllers
                 return this.BadRequest($"{nameof(EmployeeForCreationDto)} is null");
             }
 
+            if (!this.ModelState.IsValid)
+            {
+                this.logger.LogError($"Invalid model state for the {nameof(EmployeeForCreationDto)} object");
+                return this.UnprocessableEntity(ModelState);
+            }
+
             Company company = this.repository.Company.GetCompany(companyId, trackChanges: false);
 
             if (company == null)
@@ -132,6 +138,12 @@ namespace CompanyEmployees.Controllers
                 return this.BadRequest($"{nameof(EmployeeForUpdateDto)} is null");
             }
 
+            if (!this.ModelState.IsValid)
+            {
+                this.logger.LogError($"Invalid model state for the {nameof(EmployeeForUpdateDto)} object");
+                return this.UnprocessableEntity(ModelState);
+            }
+
             Company company = this.repository.Company.GetCompany(companyId, trackChanges: false);
 
             if (company == null)
@@ -181,6 +193,16 @@ namespace CompanyEmployees.Controllers
             }
 
             EmployeeForUpdateDto employeeDto = this.mapper.Map<EmployeeForUpdateDto>(employee);
+
+            patchDoc.ApplyTo(employeeDto, this.ModelState);
+            this.TryValidateModel(employeeDto);
+
+            if (!this.ModelState.IsValid)
+            {
+                this.logger.LogError($"Invalid model state for the patch document");
+                return this.UnprocessableEntity(ModelState);
+            }
+
             patchDoc.ApplyTo(employeeDto);
             this.mapper.Map(employeeDto, employee);
             this.repository.Save();

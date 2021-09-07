@@ -65,6 +65,12 @@ namespace CompanyEmployees.Controllers
                 return this.BadRequest($"{nameof(CompanyForCreationDto)} is null");
             }
 
+            if (!this.ModelState.IsValid)
+            {
+                this.logger.LogError($"Invalid model state for the {nameof(CompanyForCreationDto)} object");
+                return this.UnprocessableEntity(ModelState);
+            }
+
             Company company = this.mapper.Map<Company>(companyDto);
 
             this.repository.Company.CreateCompany(company);
@@ -145,6 +151,12 @@ namespace CompanyEmployees.Controllers
             {
                 this.logger.LogError($"{nameof(CompanyForUpdateDto)} object received from client is null.");
                 return this.BadRequest($"{nameof(CompanyForUpdateDto)} is null");
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                this.logger.LogError($"Invalid model state for the {nameof(CompanyForUpdateDto)} object");
+                return this.UnprocessableEntity(ModelState);
             }
 
             Company company = this.repository.Company.GetCompany(id, trackChanges: true);

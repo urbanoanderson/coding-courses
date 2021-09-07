@@ -44,6 +44,11 @@ namespace CompanyEmployees
             }).AddNewtonsoftJson() //To use JSON PATCH
               .AddXmlDataContractSerializerFormatters()
               .AddCustomCSVFormatter();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         public void Configure(
