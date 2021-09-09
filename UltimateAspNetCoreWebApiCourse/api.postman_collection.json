@@ -211,15 +211,24 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63/employees/",
+							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63/employees?pageNumber=1&pageSize=2",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"companies",
 								"1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63",
-								"employees",
-								""
+								"employees"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								}
 							]
 						}
 					},
