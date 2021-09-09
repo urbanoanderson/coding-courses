@@ -36,6 +36,9 @@ namespace CompanyEmployees.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery]EmployeeParameters employeeParameters)
         {
+            if (!employeeParameters.ValidAgeRange)
+                return this.BadRequest("Max age can't be less than min age.");
+
             Company company = await this.repository.Company.GetCompanyAsync(companyId, trackChanges: false);
 
             if (company == null)
