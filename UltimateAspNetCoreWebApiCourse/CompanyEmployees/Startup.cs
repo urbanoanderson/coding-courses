@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CompanyEmployees.Extensions;
 using Contracts;
+using CompanyEmployees.ActionFilters;
 
 namespace CompanyEmployees
 {
@@ -36,6 +37,10 @@ namespace CompanyEmployees
             services.ConfigureLoggerService();
             services.ConfigureSqlContext(this.Configuration);
             services.ConfigureRepositoryManager();
+
+            services.AddScoped<ValidationFilterAttribute>();
+            services.AddScoped<ValidateCompanyExistsAttribute>();
+            services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
 
             services.AddControllers(config =>
             {
