@@ -9,6 +9,29 @@
 			"name": "Companies",
 			"item": [
 				{
+					"name": "Options Companies",
+					"request": {
+						"method": "OPTIONS",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/companies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Companies",
 					"request": {
 						"method": "GET",
@@ -205,6 +228,25 @@
 		{
 			"name": "Employees",
 			"item": [
+				{
+					"name": "Head Employees",
+					"request": {
+						"method": "HEAD",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Get Employees",
 					"request": {
