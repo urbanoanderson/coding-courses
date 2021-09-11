@@ -9,7 +9,7 @@
 			"name": "Companies",
 			"item": [
 				{
-					"name": "Get All Companies",
+					"name": "Get Companies",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -206,7 +206,26 @@
 			"name": "Employees",
 			"item": [
 				{
-					"name": "Get Employees of Company",
+					"name": "Get Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employees Pagination",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -235,7 +254,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Employees Filter Age",
+					"name": "Get Employees Filter",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -264,7 +283,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Employees Search Name",
+					"name": "Get Employees Search",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -314,7 +333,81 @@
 					"response": []
 				},
 				{
-					"name": "Get Employee of Company",
+					"name": "Get Employees DataShape",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63/employees?fields=name,age",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63",
+								"employees"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "name,age"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employees All Query Features",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63/employees?pageNumber=1&pageSize=2&searchTerm=alain&minAge=28&maxAge=33&orderBy=age,name desc&fields=name,age",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63",
+								"employees"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								},
+								{
+									"key": "searchTerm",
+									"value": "alain"
+								},
+								{
+									"key": "minAge",
+									"value": "28"
+								},
+								{
+									"key": "maxAge",
+									"value": "33"
+								},
+								{
+									"key": "orderBy",
+									"value": "age,name desc"
+								},
+								{
+									"key": "fields",
+									"value": "name,age"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -334,7 +427,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Employee For Company",
+					"name": "Create Employee",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -363,7 +456,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete Employee of Company",
+					"name": "Delete Employee",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -383,7 +476,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Employee of Company",
+					"name": "Update Employee",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -412,7 +505,7 @@
 					"response": []
 				},
 				{
-					"name": "Patch Employee of Company",
+					"name": "Patch Employee",
 					"request": {
 						"method": "PATCH",
 						"header": [],

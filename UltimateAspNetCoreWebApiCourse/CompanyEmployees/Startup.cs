@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 using CompanyEmployees.Extensions;
 using Contracts;
 using CompanyEmployees.ActionFilters;
+using Entities.DataTransferObjects;
+using Repository.DataShaping;
 
 namespace CompanyEmployees
 {
@@ -41,6 +43,7 @@ namespace CompanyEmployees
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<ValidateCompanyExistsAttribute>();
             services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
+            services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
 
             services.AddControllers(config =>
             {

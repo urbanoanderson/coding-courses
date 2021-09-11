@@ -27,5 +27,7 @@ namespace Entities.RequestFeatures
         public int PageNumber { get; set; } = 1;
 
         public string OrderBy { get; set; }
+
+        public string Fields { get; set; }
     }
 }

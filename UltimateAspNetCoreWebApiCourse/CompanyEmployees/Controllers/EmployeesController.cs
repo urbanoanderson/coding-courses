@@ -18,19 +18,23 @@ namespace CompanyEmployees.Controllers
     [Route("api/companies/{companyId}/employees")]
     public class EmployeesController : ControllerBase
     {
-        private IRepositoryManager repository;
+        private readonly IRepositoryManager repository;
 
-        private ILoggerManager logger;
+        private readonly ILoggerManager logger;
 
-        private IMapper mapper;
+        private readonly IMapper mapper;
+
+        private readonly IDataShaper<EmployeeDto> dataShaper;
 
         public EmployeesController(IRepositoryManager repository,
             ILoggerManager logger,
-            IMapper mapper)
+            IMapper mapper,
+            IDataShaper<EmployeeDto> dataShaper)
         {
             this.repository = repository;
             this.logger = logger;
             this.mapper = mapper;
+            this.dataShaper = dataShaper;
         }
 
         [HttpGet]
@@ -54,7 +58,7 @@ namespace CompanyEmployees.Controllers
             
             IEnumerable<EmployeeDto> employeesDto = this.mapper.Map<IEnumerable<EmployeeDto>>(employees);
 
-            return this.Ok(employeesDto);
+            return this.Ok(this.dataShaper.ShapeData(employeesDto, employeeParameters.Fields));
         }
 
         [HttpGet("{id}", Name = "GetEmployeeForCompany")]
