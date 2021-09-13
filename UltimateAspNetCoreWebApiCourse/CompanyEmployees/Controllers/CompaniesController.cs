@@ -38,7 +38,7 @@ namespace CompanyEmployees.Controllers
             return this.Ok();
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetCompanies")]
         public async Task<IActionResult> GetCompanies()
         {
             var companies = await this.repository.Company.GetAllCompaniesAsync(trackChanges: false);
@@ -87,7 +87,7 @@ namespace CompanyEmployees.Controllers
             return this.Ok(companiesToReturn);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateCompany")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateCompany([FromBody]CompanyForCreationDto companyDto)
         {

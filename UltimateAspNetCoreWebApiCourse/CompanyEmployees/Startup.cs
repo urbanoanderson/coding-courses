@@ -18,6 +18,7 @@ using Contracts;
 using CompanyEmployees.ActionFilters;
 using Entities.DataTransferObjects;
 using Repository.DataShaping;
+using CompanyEmployees.Utility;
 
 namespace CompanyEmployees
 {
@@ -43,7 +44,9 @@ namespace CompanyEmployees
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<ValidateCompanyExistsAttribute>();
             services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
+            services.AddScoped<ValidateMediaTypeAttribute>();
             services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
+            services.AddScoped<EmployeeLinks>();
 
             services.AddControllers(config =>
             {
@@ -52,6 +55,8 @@ namespace CompanyEmployees
             }).AddNewtonsoftJson() //To use JSON PATCH
               .AddXmlDataContractSerializerFormatters()
               .AddCustomCSVFormatter();
+
+            services.AddCustomMediaTypes();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

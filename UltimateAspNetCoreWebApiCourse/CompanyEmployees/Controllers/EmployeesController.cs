@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CompanyEmployees.ActionFilters;
+using CompanyEmployees.Utility;
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
@@ -24,21 +25,22 @@ namespace CompanyEmployees.Controllers
 
         private readonly IMapper mapper;
 
-        private readonly IDataShaper<EmployeeDto> dataShaper;
+        private readonly EmployeeLinks employeeLinks;
 
         public EmployeesController(IRepositoryManager repository,
             ILoggerManager logger,
             IMapper mapper,
-            IDataShaper<EmployeeDto> dataShaper)
+            EmployeeLinks employeeLinks)
         {
             this.repository = repository;
             this.logger = logger;
             this.mapper = mapper;
-            this.dataShaper = dataShaper;
+            this.employeeLinks = employeeLinks;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetEmployeesForCompany")]
         [HttpHead]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery]EmployeeParameters employeeParameters)
         {
             if (!employeeParameters.ValidAgeRange)
@@ -59,7 +61,9 @@ namespace CompanyEmployees.Controllers
             
             IEnumerable<EmployeeDto> employeesDto = this.mapper.Map<IEnumerable<EmployeeDto>>(employees);
 
-            return this.Ok(this.dataShaper.ShapeData(employeesDto, employeeParameters.Fields));
+            var links = this.employeeLinks.TryGenerateLinks(employeesDto, employeeParameters.Fields, companyId, this.HttpContext);
+
+            return links.HasLinks ? this.Ok(links.LinkedEntities) : this.Ok(links.ShapedEntities);
         }
 
         [HttpGet("{id}", Name = "GetEmployeeForCompany")]
@@ -108,7 +112,7 @@ namespace CompanyEmployees.Controllers
             return this.CreatedAtRoute("GetEmployeeForCompany", new { companyId, id = employeeToReturn.Id }, employeeToReturn);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteEmployeeForCompany")]
         [ServiceFilter(typeof(ValidateEmployeeForCompanyExistsAttribute))]
         public async Task<IActionResult> DeleteEmployeeForCompany(Guid companyId, Guid id)
         {
@@ -120,7 +124,7 @@ namespace CompanyEmployees.Controllers
             return this.NoContent();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}", Name = "UpdateEmployeeForCompany")]
         [ServiceFilter(typeof(ValidateEmployeeForCompanyExistsAttribute))]
         public async Task<IActionResult> UpdateEmployeeForCompany(Guid companyId, Guid id, [FromBody]EmployeeForUpdateDto employeeDto)
         {
@@ -132,7 +136,7 @@ namespace CompanyEmployees.Controllers
             return this.NoContent();
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("{id}", Name = "PartiallyUpdateEmployeeForCompany")]
         [ServiceFilter(typeof(ValidateEmployeeForCompanyExistsAttribute))]
         public async Task<IActionResult> PartiallyUpdateEmployeeForCompany(Guid companyId, Guid id,
             [FromBody]JsonPatchDocument<EmployeeForUpdateDto> patchDoc)
