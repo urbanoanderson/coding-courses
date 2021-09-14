@@ -13,8 +13,9 @@ using System.Threading.Tasks;
 
 namespace CompanyEmployees.Controllers
 {
-    [ApiController]
+    [ApiVersion("1.0")]
     [Route("api/companies")]
+    [ApiController]
     public class CompaniesController : ControllerBase
     {
         private readonly IRepositoryManager repository;

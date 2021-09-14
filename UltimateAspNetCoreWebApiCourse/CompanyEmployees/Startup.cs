@@ -40,6 +40,7 @@ namespace CompanyEmployees
             services.ConfigureLoggerService();
             services.ConfigureSqlContext(this.Configuration);
             services.ConfigureRepositoryManager();
+            services.ConfigureVersioning();
 
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<ValidateCompanyExistsAttribute>();

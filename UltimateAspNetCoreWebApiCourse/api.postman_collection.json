@@ -55,6 +55,34 @@
 					"response": []
 				},
 				{
+					"name": "Get Companies V2 Controller",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/json",
+								"type": "text"
+							},
+							{
+								"key": "api-version",
+								"value": "2.0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/companies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Company",
 					"request": {
 						"method": "GET",
