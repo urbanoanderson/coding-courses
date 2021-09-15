@@ -41,6 +41,9 @@ namespace CompanyEmployees
             services.ConfigureSqlContext(this.Configuration);
             services.ConfigureRepositoryManager();
             services.ConfigureVersioning();
+            services.ConfigureResponseCaching();
+            services.AddHttpContextAccessor();
+            services.ConfigureHttpCacheHeaders();
 
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<ValidateCompanyExistsAttribute>();
@@ -53,6 +56,7 @@ namespace CompanyEmployees
             {
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
+                config.CacheProfiles.Add("120SecondsDuration", new CacheProfile() { Duration = 120 });
             }).AddNewtonsoftJson() //To use JSON PATCH
               .AddXmlDataContractSerializerFormatters()
               .AddCustomCSVFormatter();
@@ -89,6 +93,10 @@ namespace CompanyEmployees
             {
                 ForwardedHeaders = ForwardedHeaders.All
             });
+
+            app.UseResponseCaching();
+
+            app.UseHttpCacheHeaders();
 
             app.UseRouting();
 

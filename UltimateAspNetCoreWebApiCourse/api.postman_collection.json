@@ -101,6 +101,35 @@
 					"response": []
 				},
 				{
+					"name": "Get Company Use Cache",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "public,max-age=60",
+								"type": "text"
+							},
+							{
+								"key": "If-None-Match",
+								"value": "\"77DD175CE3795C4CDBBD6BE306300819\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/companies/1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"1f1cdeaf-ef28-45e5-bba2-be2c1eaa0d63"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Company Collection",
 					"request": {
 						"method": "GET",
