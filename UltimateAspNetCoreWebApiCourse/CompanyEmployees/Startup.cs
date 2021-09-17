@@ -19,6 +19,7 @@ using CompanyEmployees.ActionFilters;
 using Entities.DataTransferObjects;
 using Repository.DataShaping;
 using CompanyEmployees.Utility;
+using AspNetCoreRateLimit;
 
 namespace CompanyEmployees
 {
@@ -42,6 +43,8 @@ namespace CompanyEmployees
             services.ConfigureRepositoryManager();
             services.ConfigureVersioning();
             services.ConfigureResponseCaching();
+            services.AddMemoryCache();
+            services.ConfigureRateLimitingOptions();
             services.AddHttpContextAccessor();
             services.ConfigureHttpCacheHeaders();
 
@@ -97,6 +100,8 @@ namespace CompanyEmployees
             app.UseResponseCaching();
 
             app.UseHttpCacheHeaders();
+
+            app.UseIpRateLimiting();
 
             app.UseRouting();
 
