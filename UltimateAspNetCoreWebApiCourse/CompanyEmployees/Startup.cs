@@ -47,6 +47,9 @@ namespace CompanyEmployees
             services.ConfigureRateLimitingOptions();
             services.AddHttpContextAccessor();
             services.ConfigureHttpCacheHeaders();
+            services.AddAuthentication();
+            services.ConfigureIdentity();
+            services.ConfigureJWT(this.Configuration);
 
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<ValidateCompanyExistsAttribute>();
@@ -54,6 +57,7 @@ namespace CompanyEmployees
             services.AddScoped<ValidateMediaTypeAttribute>();
             services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
             services.AddScoped<EmployeeLinks>();
+            services.AddScoped<IAuthenticationManager, AuthenticationManager>();
 
             services.AddControllers(config =>
             {
@@ -105,6 +109,7 @@ namespace CompanyEmployees
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
