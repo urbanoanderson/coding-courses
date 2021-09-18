@@ -14,3 +14,7 @@ A complete, hands-on, and easy to digest program that gets you from zero to buil
 
 Run the following command as administrator on powershell:
 - `setx SECRET "CodeMazeSecretKey" /M`
+
+## Swagger
+
+You can run the CompanyEmployees project and navigate to `http://localhost:5000/swagger/index.html` to see the API documentation

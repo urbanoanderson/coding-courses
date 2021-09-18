@@ -50,6 +50,7 @@ namespace CompanyEmployees
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJWT(this.Configuration);
+            services.ConfigureSwagger();
 
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<ValidateCompanyExistsAttribute>();
@@ -115,6 +116,13 @@ namespace CompanyEmployees
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Code Maze API v1");
+                s.SwaggerEndpoint("/swagger/v2/swagger.json", "Code Maze API v2");
             });
         }
     }
